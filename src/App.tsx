@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Settings, Trash2, AlertCircle } from "lucide-react";
+import { Trash2, AlertCircle } from "lucide-react";
 import { MessageBubble } from "./components/MessageBubble";
 import { ChatInput } from "./components/ChatInput";
-import { SettingsPanel } from "./components/SettingsPanel";
 import { useChatStore } from "./store/chat";
 import { APIKeyInput } from "./components/APIKeyInput";
 
 const App: React.FC = () => {
-  const [showSettings, setShowSettings] = useState(false);
   const { messages, error, actions } = useChatStore();
   const [apiKey, setApiKey] = useState<string | null>(
     localStorage.getItem("openai_api_key")
@@ -36,12 +34,6 @@ const App: React.FC = () => {
         </h1>
         <div className="flex space-x-2">
           <button
-            onClick={() => setShowSettings(!showSettings)}
-            className="p-2 text-gray-400 hover:bg-gray-800 rounded-lg transition-colors"
-          >
-            <Settings className="w-6 h-6" />
-          </button>
-          <button
             onClick={actions.clearMessages}
             className="p-2 text-gray-400 hover:bg-gray-800 rounded-lg transition-colors"
           >
@@ -51,7 +43,6 @@ const App: React.FC = () => {
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {showSettings && <SettingsPanel />}
         {error && (
           <div className="p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-200">
             <div className="flex items-center space-x-2">

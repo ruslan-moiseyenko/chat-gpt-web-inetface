@@ -16,13 +16,13 @@ export const useChatGPT = (apiKey: string) => {
         timestamp: new Date(),
         status: "sending"
       };
+      console.log("🚀 ~ userMessage:", userMessage.timestamp);
 
       try {
         actions.setLoading(true);
         actions.setError(null);
         actions.addMessage(userMessage);
 
-        // Отправляем сообщение вместе с историей контекста
         const response = await service.sendMessage(text, messages);
         actions.addMessage(response);
       } catch (error) {

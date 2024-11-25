@@ -8,6 +8,11 @@ interface MessageBubbleProps {
 export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   const isUser = message.sender === "user";
 
+  const formatTimestamp = (timestamp: Date | string) => {
+    const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
+    return date.toLocaleTimeString();
+  };
+
   return (
     <div
       className={`flex items-start space-x-3 ${isUser ? "justify-end" : ""}`}
@@ -24,7 +29,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
       >
         <p>{message.text}</p>
         <div className="text-xs text-gray-400 mt-1 flex items-center space-x-2">
-          <span>{message.timestamp.toLocaleTimeString()}</span>
+          <span>{formatTimestamp(message.timestamp)}</span>
           {message.status === "sending" && (
             <span className="text-yellow-500">Sending...</span>
           )}

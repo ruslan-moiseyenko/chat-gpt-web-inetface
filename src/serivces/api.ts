@@ -17,7 +17,6 @@ export class ChatGPTService {
     conversationHistory: Message[] = []
   ): Promise<Message> {
     try {
-      // Преобразуем историю сообщений в формат OpenAI
       const messages: ChatMessage[] = [
         {
           role: "system",
@@ -42,7 +41,6 @@ export class ChatGPTService {
         body: JSON.stringify({
           model: this.model,
           messages,
-          // max_tokens: CONFIG.API.MAX_TOKENS,
           temperature: CONFIG.API.TEMPERATURE
         })
       });

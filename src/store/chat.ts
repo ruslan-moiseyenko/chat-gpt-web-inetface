@@ -38,6 +38,7 @@ export const useChatStore = create<ChatState>()(
               Object.assign(message, updates);
             }
           }),
+
         setLoading: (loading) =>
           set((state) => {
             state.isLoading = loading;
